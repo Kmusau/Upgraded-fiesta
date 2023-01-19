@@ -2,7 +2,7 @@ package cellulant.com.BSK003.service;
 
 import cellulant.com.BSK003.dto.apiResponse.MovieData;
 import cellulant.com.BSK003.dto.apiResponse.Movies;
-import cellulant.com.BSK003.dto.reponse.MovieResponse;
+import cellulant.com.BSK003.dto.bskReponse.MovieResponse;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

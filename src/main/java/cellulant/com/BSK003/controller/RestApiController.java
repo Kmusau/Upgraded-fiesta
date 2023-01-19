@@ -1,6 +1,6 @@
 package cellulant.com.BSK003.controller;
 
-import cellulant.com.BSK003.dto.reponse.MovieResponse;
+import cellulant.com.BSK003.dto.bskReponse.MovieResponse;
 import cellulant.com.BSK003.service.MovieService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;

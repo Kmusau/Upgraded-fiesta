@@ -1,4 +1,4 @@
-package cellulant.com.BSK003.dto.reponse;
+package cellulant.com.BSK003.dto.bskReponse;
 
 import lombok.Data;
 
