@@ -1,24 +1,25 @@
 package cellulant.com.BSK003.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Courses {
+@Table("courses")
+public class Courses implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column("course_id")
     private int courseId;
+    @Column("course_name")
     private String courseName;
+    @Column("course_description")
     private String courseDescription;
-    @JsonIgnore
-    @ManyToMany(mappedBy = "courses")
-    private List<Trainees> trainees;
 }
