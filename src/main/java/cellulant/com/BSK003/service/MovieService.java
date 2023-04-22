@@ -7,9 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.RequestEntity;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,9 +27,19 @@ public class MovieService {
         HttpHeaders headers = new HttpHeaders();
         headers.add("X-RapidAPI-Key", "ea5879f90dmsha1cffba3cc4bfa0p13ccddjsnd0efe887f52e");
         headers.add("X-RapidAPI-Host", "imdb8.p.rapidapi.com");
+
+        /**
         RequestEntity.HeadersBuilder<?> moviesList = RequestEntity.get("https://imdb8.p.rapidapi.com/auto-complete?q=game%20of%20thr")
                 .headers(headers);
         ResponseEntity<Movies> response = restTemplate.exchange(moviesList.build(), Movies.class);
+        **/
+
+        String url = "https://imdb8.p.rapidapi.com/auto-complete?q={variables}";
+        String variables = "game%20of%20thr";
+        HttpEntity<Object> request = new HttpEntity<>(headers);
+        ResponseEntity<Movies> response = restTemplate.exchange(url, HttpMethod.GET, request, Movies.class, variables);
+
+        log.info(String.valueOf(response.getStatusCode()));
         log.info(String.valueOf(response.getBody()));
         String stringResponse = new ObjectMapper().writeValueAsString(response.getBody());
         MovieData[] movieData = response.getBody().getData();
