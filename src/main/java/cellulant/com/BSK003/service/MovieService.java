@@ -40,8 +40,7 @@ public class MovieService {
         ResponseEntity<Movies> response = restTemplate.exchange(url, HttpMethod.GET, request, Movies.class, variables);
 
         log.info(String.valueOf(response.getStatusCode()));
-        log.info(String.valueOf(response.getBody()));
-        String stringResponse = new ObjectMapper().writeValueAsString(response.getBody());
+        log.info("Movies response :: {}", new ObjectMapper().writeValueAsString(response.getBody()));
         MovieData[] movieData = response.getBody().getData();
         List<MovieData> movieList = Arrays.stream(movieData).toList();
         for (MovieData movieData1 :movieList) {
