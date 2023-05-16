@@ -7,6 +7,8 @@ import cellulant.com.BSK003.repository.CoursesRepository;
 import cellulant.com.BSK003.repository.TeamsRepository;
 import cellulant.com.BSK003.repository.TraineesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,14 +25,17 @@ public class TraineesService {
     @Autowired
     CoursesRepository coursesRepo;
 
+    @Cacheable("Trainees")
     public List<Trainees> getAllTrainees() {
         return traineesRepo.findAll();
     }
 
+    @CacheEvict(value = "Trainees", allEntries = true)
     public Trainees addTrainee(Trainees trainee) {
         return traineesRepo.save(trainee);
     }
 
+    @CacheEvict(value = "Trainees", allEntries = true) //TODO: Replace with @CachePut
     public Trainees addTraineeToTeam(int traineeId, int teamId) {
         Optional<Trainees> trainee = traineesRepo.findById(traineeId);
         Optional<Teams> team = teamsRepo.findById(teamId);
@@ -45,6 +50,7 @@ public class TraineesService {
         return new Trainees();
     }
 
+    @CacheEvict(value = "Trainees", allEntries = true) //TODO: Replace with @CachePut
     public Trainees addCourseToATrainee(int traineeId, int courseId) {
         Optional<Trainees> trainee = traineesRepo.findById(traineeId);
         Optional<Courses> course = coursesRepo.findById(courseId);
